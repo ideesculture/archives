@@ -12,4 +12,4 @@ Avoid to have double archives hierarchy or the widget won't work : ~~Providence/
 
 ## Capture
 
-![Screen capture](https://github.com/ideesculture/archives/blob/master/documentation/widget-archives.png?raw=true)
+![Screen capture](https://raw.githubusercontent.com/ideesculture/archives/7d4b698fe5fc82d5897c9c794bdfc4a6299bbe85/documentation/widget-archives.png)
