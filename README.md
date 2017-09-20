@@ -13,3 +13,5 @@ Avoid to have double archives hierarchy or the widget won't work : ~~Providence/
 ## Capture
 
 ![Screen capture](https://raw.githubusercontent.com/ideesculture/archives/7d4b698fe5fc82d5897c9c794bdfc4a6299bbe85/documentation/widget-archives.png)
+
+Capture d'écran réalisée au centre d'archives du [CPCP (Bruxelles, Belgique)](http://www.cpcp.be/nos-metiers/centre-archives-documentation)
