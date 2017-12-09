@@ -42,7 +42,7 @@
 	 	$qr_hits = $o_search->search("ca_objects.type_id:43");
 	 	$count=0;
 		while($qr_hits->nextHit()) {
-			print "<h3><button onclick='$(\"#content".$count."\").slideToggle();'>+</button> ".$qr_hits->get('ca_objects.preferred_labels.name')." (".$qr_hits->get('ca_objects.idno').")</h3>";  //confirm the id number
+			print "<h3><button onclick='$(\"#content".$count."\").slideToggle();$(this).toggleClass(\"opened\");'>+</button><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_hits->get('object_id').">".$qr_hits->get('ca_objects.preferred_labels.name')."</a> (".$qr_hits->get('ca_objects.idno').")</h3>";  //confirm the id number
 			print "<div id=\"content".$count."\" class=\"slideDownContent\">";
 			$object_id_fabrique =  $qr_hits->get('ca_objects.object_id');
 			$o_data = new Db();
@@ -52,7 +52,7 @@
 			 while($qr_result->nextRow()) {
 			       ?>
 			       <tr>
-				<?php print "<td><button onclick='$(\"#content".$count."-".$i."\").slideToggle();'>+</button><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result->get('object_id').">".$qr_result->get('name')."</a></td><td>".$qr_result->get('idno')."</td>"; ?>
+				<?php print "<td><button onclick='$(\"#content".$count."-".$i."\").slideToggle();$(this).toggleClass(\"opened\");'>+</button><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result->get('object_id').">".$qr_result->get('name')."</a></td><td class='td-right'>".$qr_result->get('idno')."</td>"; ?>
 				<?php
 				$o_data2 = new Db();
 				 $qr_result2 = $o_data2->query("SELECT ca_object_labels.object_id, idno, name FROM ca_objects left join ca_object_labels ON ca_objects.object_id = ca_object_labels.object_id AND is_preferred=1 WHERE parent_id =".$qr_result->get('object_id')." and deleted=0");
@@ -60,16 +60,26 @@
 				 print "</tr><tr><td colspan=2><table id=\"content".$count."-".$i."\" style=\"padding-left:30px;\" class=\"slideDownContent\" border=0>";
 				 while($qr_result2->nextRow()) {
 				       ?>
-					<?php print "<tr><td><button onclick='$(\"#content".$count."-".$i."-".$j."\").slideToggle();'>+</button><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result2->get('object_id').">".$qr_result2->get('name')."</a></td><td>".$qr_result2->get('idno');
+					<?php print "<tr><td><button onclick='$(\"#content".$count."-".$i."-".$j."\").slideToggle();$(this).toggleClass(\"opened\");'>+</button><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result2->get('object_id').">".$qr_result2->get('name')."</a></td><td class='td-right'>".$qr_result2->get('idno');
 						$o_data3 = new Db();
 						$qr_result3 = $o_data3->query("SELECT ca_object_labels.object_id, idno, name FROM ca_objects left join ca_object_labels ON ca_objects.object_id = ca_object_labels.object_id AND is_preferred=1 WHERE parent_id =".$qr_result2->get('object_id')." and deleted=0");
 						$k=0;
 						print "</td></tr>"; 
 						print "<tr><td colspan=2>"; 
-						print "<table id=\"content".$count."-".$i."-".$j."\" style=\"padding-left:30px;\" class=\"slideDownContent\" border=0>";
+						print "<table id=\"content".$count."-".$i."-".$j."\" style=\"padding-left:30px;width:100%;\" class=\"slideDownContent\" border=0>";
+						$k=0;
 						while($qr_result3->nextRow()) {
-							print "<tr><td><a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result3->get('object_id').">".$qr_result3->get('name')."</a></td><td>".$qr_result3->get('idno')."</td></tr>";
 							$k++;
+							print "<tr><td colspan=2><button onclick='$(\"#content".$count."-".$i."-".$j."-".$k."\").slideToggle();$(this).toggleClass(\"opened\");'>+</button> <a href=/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/".$qr_result3->get('object_id').">".$qr_result3->get('name')."</a></td><td class='td-right'>".$qr_result3->get('idno')."</td></tr>";
+							$o_data4 = new Db();
+							$qr_result4 = $o_data4->query("SELECT ca_object_labels.object_id, idno, name FROM ca_objects left join ca_object_labels ON ca_objects.object_id = ca_object_labels.object_id AND is_preferred=1 WHERE parent_id =".$qr_result3->get('object_id')." and deleted=0");
+							print "<tr><td colspan=3>";
+							print "<div id=\"content".$count."-".$i."-".$j."-".$k."\" style='display:none;'>";
+							while($qr_result4->nextRow()) {
+								print "<a href='/gestion/index.php/editor/objects/ObjectEditor/Edit/object_id/". $qr_result4->get('object_id')."'> ".$qr_result4->get('name')."</a> <span class='pull-right'>".$qr_result4->get('idno')."</span><br/>";
+							}
+							print "</div>";
+							print "</td></tr>";
 						}
 						print "</table>";
 						print "</td></tr>"; 
@@ -86,3 +96,16 @@
  	
 ?>
 </div>
+<style>
+	button.opened {
+		/*background: gray;*/
+	    text-indent: 1000px;
+	    overflow: hidden;
+	    display: inline-block;
+	    width: 22px;
+	}
+
+	.td-right {
+		text-align: right;
+	}	
+</style>
