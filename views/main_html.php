@@ -19,10 +19,11 @@ $root_type_id = $this->getVar("root_type");
 	}
 </style>
 <div class="dashboardWidgetContentContainer">
-	<div style="float: right;
+	<div style="display:block;text-align: right;
     margin-top: -10px;
     margin-right: 8px;">
-		<a class="btn" href="/gestion/index.php/archives/archives/Index"><i class="fa fa-expand pullright" aria-hidden="true"></i> Agrandir</a></div>
+		<a class="btn" href="/gestion/index.php/archives/archives/Index"><i class="fa fa-expand pullright" aria-hidden="true"></i> Agrandir</a>
+    </div>
 
 	<div id="injectArchiveTree">
 		...
@@ -34,10 +35,20 @@ $root_type_id = $this->getVar("root_type");
 	.archiveHierarchyOffset2 {width:69%;padding-left:6%;}
 	.archiveHierarchyOffset3 {width:66%;padding-left:9%;}
 	.archiveHierarchyOffset4 {width:63%;padding-left:12%;}
-	a[id^="expandButton"], a[id^="shrinkButton"] {
-		color:black;
-		cursor:pointer;
-	}
+    .dashboardWidgetContentContainer {
+    }
+    .hierarchyFor {
+        margin-bottom:5px;
+    }
+    div[class^=archiveHierarchyOffset] {
+        margin-bottom:5px;
+        display:inline-block;
+    }
+    a[id^="expandButton"], a[id^="shrinkButton"] {
+        color:black;
+        cursor:pointer;
+        text-decoration: none;
+    }
 </style>
 <script>
 	jQuery("document").ready(function() {
