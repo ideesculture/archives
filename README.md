@@ -1,5 +1,5 @@
-# archives
-simple widget for CollectiveAccess Providence to display top root hierarchives for archival description
+# Archives
+Simple widget for CollectiveAccess Providence to display top root hierarchives for archival description
 
 ## Installation
 
